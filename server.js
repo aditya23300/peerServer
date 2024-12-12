@@ -9,32 +9,20 @@ require("dotenv").config();
 const app = express();
 const server = http.createServer(app);
 
-// Comprehensive CORS configuration
-// const corsOptions = {
-//   origin: function (origin, callback) {
-//     // Allow requests with no origin (like mobile apps or curl requests)
-//     // or from specific allowed origins
-//     const allowedOrigins = [
-//       "http://localhost:3000", // Local development
-//       // Production webapp domain
-//       "https://loop-connect.onrender.com",
-//       // Add any other domains that should access your PeerJS server
-//     ];
+const allowedOrigins = [
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : undefined, // Allow localhost only in development mode
+  "https://loop-connect.onrender.com", // Production domain
+  // Add other trusted domains here
+].filter(Boolean); // Remove undefined values
 
-//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("Not allowed by CORS"));
-//     }
-//   },
-//   methods: ["GET", "POST", "OPTIONS"],
-//   allowedHeaders: ["Content-Type", "Authorization"],
-//   credentials: true,
-//   optionsSuccessStatus: 200,
-// };
+// Setup CORS middleware
+const corsOptions = {
+  origin: allowedOrigins,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
 
-// Apply CORS middleware
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Logging middleware
 app.use((req, res, next) => {
