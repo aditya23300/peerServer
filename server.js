@@ -45,7 +45,7 @@ app.use((req, res, next) => {
 // Create PeerJS server with enhanced configuration
 const peerServer = ExpressPeerServer(server, {
   debug: true, // Detailed logging
-  path: "/",
+  path: "/peerjs",
   allow_discovery: true,
   config: {
     iceServers: [
