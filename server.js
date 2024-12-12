@@ -9,32 +9,32 @@ require("dotenv").config();
 const app = express();
 const server = http.createServer(app);
 
-// Comprehensive CORS configuration
-const corsOptions = {
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    // or from specific allowed origins
-    const allowedOrigins = [
-      "http://localhost:3000", // Local development
-      // Production webapp domain
-      "https://loop-connect.onrender.com",
-      // Add any other domains that should access your PeerJS server
-    ];
+// // Comprehensive CORS configuration
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     // Allow requests with no origin (like mobile apps or curl requests)
+//     // or from specific allowed origins
+//     const allowedOrigins = [
+//       "http://localhost:3000", // Local development
+//       // Production webapp domain
+//       "https://loop-connect.onrender.com",
+//       // Add any other domains that should access your PeerJS server
+//     ];
 
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
-  optionsSuccessStatus: 200,
-};
+//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+//   methods: ["GET", "POST", "OPTIONS"],
+//   allowedHeaders: ["Content-Type", "Authorization"],
+//   credentials: true,
+//   optionsSuccessStatus: 200,
+// };
 
 // Apply CORS middleware
-app.use(cors(corsOptions));
+app.use(cors());
 
 // Logging middleware
 app.use((req, res, next) => {
