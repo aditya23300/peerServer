@@ -9,7 +9,7 @@ require("dotenv").config();
 const app = express();
 const server = http.createServer(app);
 
-// // Comprehensive CORS configuration
+// Comprehensive CORS configuration
 // const corsOptions = {
 //   origin: function (origin, callback) {
 //     // Allow requests with no origin (like mobile apps or curl requests)
@@ -45,7 +45,7 @@ app.use((req, res, next) => {
 // Create PeerJS server with enhanced configuration
 const peerServer = ExpressPeerServer(server, {
   debug: true, // Detailed logging
-  path: "/peerjs",
+  path: "/",
   allow_discovery: true,
   config: {
     iceServers: [
