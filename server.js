@@ -13,7 +13,6 @@ const allowedOrigins = [
   process.env.NODE_ENV === "development" ? "http://localhost:3000" : undefined, // Allow localhost only in development mode
   "https://loop-connect.onrender.com", // Production domain
   // Add other trusted domains here
-  "http://localhost:4200"
 ].filter(Boolean); // Remove undefined values
 
 // Setup CORS middleware
@@ -22,8 +21,8 @@ const corsOptions = {
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
-
-//app.use(cors(corsOptions));
+if(!process.env.NODE_ENV === "development")
+app.use(cors(corsOptions));
 
 // Logging middleware
 app.use((req, res, next) => {
